@@ -1,0 +1,28 @@
+  \begin{block}{Tracker Prevalence in 2025: Highest vs.\ Lowest Countries}
+
+    The percentage of government websites with any tracker in 2025 spans an extreme range across the 61 studied countries, illustrating strong geographic heterogeneity in citizens' tracking exposure.
+
+    \begin{figure}
+      \centering
+      \begin{tikzpicture}
+        \begin{axis}[
+            ybar,
+            width=0.85\colwidth,
+            height=13cm,
+            ylabel={Websites with trackers (\%)},
+            symbolic x coords={SG, AU, BD, FR, DE, CN},
+            xtick=data,
+            ymin=0, ymax=100,
+            nodes near coords,
+            bar width=1.6cm,
+            xlabel={Country (2025)},
+        ]
+          \addplot coordinates {(SG,95.5) (AU,89.0) (BD,82.5) (FR,11.6) (DE,9.2) (CN,6.1)};
+        \end{axis}
+      \end{tikzpicture}
+      \caption{Government websites with any tracker in 2025: top three (Singapore, Australia, Bangladesh) vs.\ bottom three (France, Germany, China) countries.}
+    \end{figure}
+
+    In Bangladesh, all tracked sites shared a single Google Tag Manager script with the same Measurement ID, suggesting a centrally coordinated rollout that can effectively merge analytics across distinct government services. \textbf{26 countries} reached their all-time peak tracker presence in 2025 and \textbf{14 more} in 2024, while a few peaked much earlier (Kazakhstan 1997, France 2015, China 2018, Germany 2019).
+
+  \end{block}

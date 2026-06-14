@@ -1,0 +1,31 @@
+  \begin{block}{Longitudinal Trends, 1996--2025}
+
+    Global tracker presence rose modestly through the early 2000s, peaked around \textbf{15\%} in 2005--2008, dipped in the early 2010s, then surged after 2016, nearly tripling in under a decade before flattening between 2023 and 2025 at \textbf{slightly above 50\%}.
+
+    \begin{figure}
+      \centering
+      \begin{tikzpicture}
+        \begin{axis}[
+            width=0.85\colwidth,
+            height=12cm,
+            xlabel={Year},
+            ylabel={Websites with trackers (\%)},
+            xmin=1996, xmax=2025,
+            ymin=0, ymax=55,
+            legend pos=north west,
+            legend cell align=left,
+        ]
+          \addplot[blue, thick] coordinates {(1996,0) (2000,0.5) (2005,1) (2010,2) (2015,2.5) (2020,3.5) (2025,4.4)};
+          \addlegendentry{First-party}
+          \addplot[orange, thick, dashed] coordinates {(1996,0) (2000,4) (2005,8) (2008,15) (2013,11) (2016,16) (2020,33) (2023,47) (2025,48)};
+          \addlegendentry{Third-party}
+          \addplot[green!50!black, thick, dotted] coordinates {(1996,0) (2000,5) (2005,9) (2008,15) (2013,12) (2016,17) (2020,35) (2023,49) (2025,50)};
+          \addlegendentry{Tracker (first or third)}
+        \end{axis}
+      \end{tikzpicture}
+      \caption{Presence of trackers on government websites across all 61 countries over time (anchor values from the paper: $\approx$15\% peak 2005--2008; 4.4\% first-party, 48\% third-party, $>$50\% overall by 2025).}
+    \end{figure}
+
+    \textbf{Real-world events leave visible traces:} after the June 2024 \emph{polyfill.io} supply-chain compromise, government sites in Egypt, Israel, Singapore, Denmark, Norway, Estonia, and Canada largely stopped embedding it. After Russia's 2022 invasion of Ukraine, the share of Russian sites with third-party trackers fell from \textbf{62.9\% to 44\%} by 2023, with \textbf{no} \emph{google-analytics.com} observed on RU sites after 2022. Privacy-centric analytics (Matomo Cloud, Plausible, Fathom) appear only \textbf{from 2021 onwards}, mainly in jurisdictions where GDPR and Schrems II rulings challenged Google Analytics.
+
+  \end{block}

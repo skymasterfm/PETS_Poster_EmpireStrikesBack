@@ -81,50 +81,9 @@
 
 \begin{column}{\colwidth}
 
-  \begin{block}{Motivation: Trackers on Essential Public Services}
-
-    Citizens rely on government websites for essential services such as applying for a passport, filing taxes, or obtaining healthcare information, and they generally expect privacy. Unlike commercial platforms, government portals are often the \textbf{only available option}, leaving individuals with no ability to opt out. In practice, many government websites embed third-party trackers that collect browsing behavior, unique identifiers, and digital fingerprints, raising privacy, security, and data sovereignty concerns, including \textbf{cross-border tracker-data flows}. Prior work mostly targets commercial websites or small, single-country government samples and is rarely longitudinal. We present the \textbf{first large-scale, global, longitudinal study} of tracking on government websites.
-
-  \end{block}
-
-  \begin{block}{Dataset \& Methodology}
-
-    \begin{itemize}
-      \item \textbf{Website list:} \textbf{18.9K} federal-level government websites across \textbf{61 countries} on all continents, from Kumar et al.'s IMC 2024 dataset.
-      \item \textbf{Archival source:} Internet Archive Wayback Machine snapshots spanning \textbf{1996--2025}; \textbf{16.5K} websites had at least one snapshot (\textbf{88\%} average coverage per country).
-      \item \textbf{Sampling:} \textbf{2 homepage snapshots per site per year} (first of year + one random), analyzed at yearly granularity; \textbf{7.3M} URLs extracted (\textbf{5.6M} unique) after de-rewriting archive URLs.
-      \item \textbf{Tracker labeling:} EasyList + EasyPrivacy + \textbf{21 regional filter lists} (June 2025 snapshot, validated against 2006/2010/2020 historical lists; modern list had \textbf{0.01\%} vs.\ \textbf{0.54\%} false-positive rate on 2006 data).
-      \item \textbf{Ownership mapping:} DuckDuckGo Tracker Radar maps \textbf{365 of 1098} tracker domains (eTLD+1) to \textbf{265 organizations}.
-      \item \textbf{Statistics:} Mann--Kendall trend tests on 5-year buckets, Jaccard similarity, Herfindahl--Hirschman Index (HHI), and a First-Observed Uptake (FOU) measure.
-    \end{itemize}
-
-    \begin{figure}
-      \centering
-      \begin{tikzpicture}[
-        node distance=1.6cm,
-        box/.style={draw, rounded corners, align=center, fill=white, text width=0.65\colwidth, inner sep=0.5cm, font=\small},
-        arr/.style={->, line width=2.5pt}
-      ]
-        \node[box] (src) {\textbf{Data Source:} Kumar et al.\ IMC'24 list --- 18.9K sites, 61 countries};
-        \node[box, below=of src] (arch) {\textbf{Crawling / Archiving:} Internet Archive snapshots, 1996--2025};
-        \node[box, below=of arch] (extract) {\textbf{Feature Extraction:} 7.3M URLs; EasyList/EasyPrivacy + regional lists; Tracker Radar};
-        \node[box, below=of extract] (analysis) {\textbf{Longitudinal Analysis:} Mann--Kendall, HHI, Jaccard, FOU};
-        \node[box, below=of analysis] (find) {\textbf{Findings:} prevalence, geography, ownership, uptake};
-        \draw[arr] (src) -- (arch);
-        \draw[arr] (arch) -- (extract);
-        \draw[arr] (extract) -- (analysis);
-        \draw[arr] (analysis) -- (find);
-      \end{tikzpicture}
-      \caption{Measurement pipeline: from government website lists to longitudinal tracker findings.}
-    \end{figure}
-
-  \end{block}
-
-  \begin{alertblock}{Key Takeaway}
-
-    \textbf{Tracking on government websites has shifted from rare to routine: by 2025, trackers appear on $\approx$50\% of studied sites.} Growth is overwhelmingly driven by \textbf{third-party} services (48\% of sites in 2025 vs.\ only 4.4\% first-party), dominated by a few large \textbf{US-based organizations} led by Google and Meta, exposing citizens worldwide to unequal privacy and security risks on essential services.
-
-  \end{alertblock}
+  \input{sections/motivation}
+  \input{sections/dataset_methodology}
+  \input{sections/key_takeaway}
 
 \end{column}
 
@@ -132,47 +91,8 @@
 
 \begin{column}{\colwidth}
 
-  \begin{block}{Key Findings}
-
-    \begin{itemize}
-      \item \textbf{50\% of} government websites embed at least one tracker by 2025, up from near zero in 1996, with a steep post-2016 surge.
-      \item \textbf{Third-party services drive nearly all growth:} 48\% of sites carry third-party trackers in 2025 versus only \textbf{4.4\%} with first-party trackers.
-      \item \textbf{Adoption is highly uneven:} Singapore (\textbf{95.5\%}), Australia (\textbf{89.0\%}), and Bangladesh (\textbf{82.5\%}) lead in 2025, while China (\textbf{6.1\%}), Germany (\textbf{9.2\%}), and France (\textbf{11.6\%}) stay persistently low.
-      \item \textbf{Ownership is concentrated:} Google trackers were embedded \textbf{68K times}, far ahead of Meta (\textbf{6,635}); \emph{google-analytics.com} and \emph{googletagmanager.com} appear in \textbf{all 61 countries}; mean $HHI_{\mathrm{org}}$ = \textbf{0.601} vs.\ $HHI_{\mathrm{tracker}}$ = \textbf{0.374}.
-      \item \textbf{Trackers sometimes vanish:} we find \textbf{39 tracker gaps} across \textbf{26 countries}; in \textbf{37} cases the same sites remained archived without trackers, suggesting deliberate temporary suspensions.
-      \item \textbf{High churn:} only \textbf{30\%} of trackers persist year-over-year after first uptake, with an average of \textbf{77 new tracker uptakes per year} globally (peak \textbf{161} in 2017).
-    \end{itemize}
-
-  \end{block}
-
-  \begin{block}{Tracker Prevalence in 2025: Highest vs.\ Lowest Countries}
-
-    The percentage of government websites with any tracker in 2025 spans an extreme range across the 61 studied countries, illustrating strong geographic heterogeneity in citizens' tracking exposure.
-
-    \begin{figure}
-      \centering
-      \begin{tikzpicture}
-        \begin{axis}[
-            ybar,
-            width=0.85\colwidth,
-            height=13cm,
-            ylabel={Websites with trackers (\%)},
-            symbolic x coords={SG, AU, BD, FR, DE, CN},
-            xtick=data,
-            ymin=0, ymax=100,
-            nodes near coords,
-            bar width=1.6cm,
-            xlabel={Country (2025)},
-        ]
-          \addplot coordinates {(SG,95.5) (AU,89.0) (BD,82.5) (FR,11.6) (DE,9.2) (CN,6.1)};
-        \end{axis}
-      \end{tikzpicture}
-      \caption{Government websites with any tracker in 2025: top three (Singapore, Australia, Bangladesh) vs.\ bottom three (France, Germany, China) countries.}
-    \end{figure}
-
-    In Bangladesh, all tracked sites shared a single Google Tag Manager script with the same Measurement ID, suggesting a centrally coordinated rollout that can effectively merge analytics across distinct government services. \textbf{26 countries} reached their all-time peak tracker presence in 2025 and \textbf{14 more} in 2024, while a few peaked much earlier (Kazakhstan 1997, France 2015, China 2018, Germany 2019).
-
-  \end{block}
+  \input{sections/key_findings}
+  \input{sections/tracker_prevalence}
 
 \end{column}
 
@@ -180,62 +100,9 @@
 
 \begin{column}{\colwidth}
 
-  \begin{block}{Longitudinal Trends, 1996--2025}
-
-    Global tracker presence rose modestly through the early 2000s, peaked around \textbf{15\%} in 2005--2008, dipped in the early 2010s, then surged after 2016, nearly tripling in under a decade before flattening between 2023 and 2025 at \textbf{slightly above 50\%}.
-
-    \begin{figure}
-      \centering
-      \begin{tikzpicture}
-        \begin{axis}[
-            width=0.85\colwidth,
-            height=12cm,
-            xlabel={Year},
-            ylabel={Websites with trackers (\%)},
-            xmin=1996, xmax=2025,
-            ymin=0, ymax=55,
-            legend pos=north west,
-            legend cell align=left,
-        ]
-          \addplot[blue, thick] coordinates {(1996,0) (2000,0.5) (2005,1) (2010,2) (2015,2.5) (2020,3.5) (2025,4.4)};
-          \addlegendentry{First-party}
-          \addplot[orange, thick, dashed] coordinates {(1996,0) (2000,4) (2005,8) (2008,15) (2013,11) (2016,16) (2020,33) (2023,47) (2025,48)};
-          \addlegendentry{Third-party}
-          \addplot[green!50!black, thick, dotted] coordinates {(1996,0) (2000,5) (2005,9) (2008,15) (2013,12) (2016,17) (2020,35) (2023,49) (2025,50)};
-          \addlegendentry{Tracker (first or third)}
-        \end{axis}
-      \end{tikzpicture}
-      \caption{Presence of trackers on government websites across all 61 countries over time (anchor values from the paper: $\approx$15\% peak 2005--2008; 4.4\% first-party, 48\% third-party, $>$50\% overall by 2025).}
-    \end{figure}
-
-    \textbf{Real-world events leave visible traces:} after the June 2024 \emph{polyfill.io} supply-chain compromise, government sites in Egypt, Israel, Singapore, Denmark, Norway, Estonia, and Canada largely stopped embedding it. After Russia's 2022 invasion of Ukraine, the share of Russian sites with third-party trackers fell from \textbf{62.9\% to 44\%} by 2023, with \textbf{no} \emph{google-analytics.com} observed on RU sites after 2022. Privacy-centric analytics (Matomo Cloud, Plausible, Fathom) appear only \textbf{from 2021 onwards}, mainly in jurisdictions where GDPR and Schrems II rulings challenged Google Analytics.
-
-  \end{block}
-
-  \begin{block}{Implications \& Recommendations}
-
-    \begin{itemize}
-      \item \textbf{Default-off templates:} public authorities should adopt centrally maintained web templates with third-party trackers disabled by default and explicit, documented opt-in for additions.
-      \item \textbf{Procurement safeguards:} contracts should mandate full visibility into third-party components, documented data flows, and a standing right to remove non-essential trackers.
-      \item \textbf{Privacy-preserving analytics:} prioritize self-hosted or log-based analytics with strict retention limits, plus periodic automated audits of official domains for third-party requests.
-      \item \textbf{User-side protection:} citizens can block third-party cookies, use tracking protection or dedicated browser profiles for government tasks, and limit ambient permissions and extensions.
-    \end{itemize}
-
-  \end{block}
-
-  \begin{block}{Key References}
-
-    \footnotesize{
-    \begin{itemize}
-      \item Kumar et al. Of Choices and Control --- A Comparative Analysis of Government Hosting. \emph{ACM IMC}, 2024.
-      \item Lerner et al. Internet Jones and the Raiders of the Lost Trackers: An Archaeological Study of Web Tracking from 1996 to 2016. \emph{USENIX Security}, 2016.
-      \item Samarasinghe et al. Et tu, Brute? Privacy Analysis of Government Websites and Mobile Apps. \emph{ACM Web Conference}, 2022.
-      \item G\"otze et al. Measuring Web Cookies in Governmental Websites. \emph{ACM Web Science Conference}, 2022.
-      \item Englehardt and Narayanan. Online Tracking: A 1-Million-Site Measurement and Analysis. \emph{ACM CCS}, 2016.
-    \end{itemize}
-    }
-
-  \end{block}
+  \input{sections/longitudinal_trends}
+  \input{sections/implications}
+  \input{sections/references}
 
 \end{column}
 

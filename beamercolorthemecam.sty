@@ -1,17 +1,13 @@
-% Gemini theme
-% https://github.com/anishathalye/gemini
+% Gemini theme — adapted for joint Utah/NYUAD poster
 
 % ====================
 % Definitions
 % ====================
 
-% Colors from https://www.cam.ac.uk/brand-resources/guidelines/typography-and-colour/rgb-and-hex-references
-%\definecolor{camblue}{RGB}{0, 62, 114}
-\definecolor{lightnyupurple}{RGB}{159, 120, 184}
-\definecolor{nyupurple}{RGB}{90, 35, 140}
-% Extra colors
+\definecolor{themecolor}{RGB}{0,60,120}       % dark academic navy (neutral, not uni-specific)
+\definecolor{lightthemecolor}{RGB}{90,130,180} % lighter accent
 \definecolor{lightgray}{RGB}{240, 240, 240}
-\definecolor{lightorange}{RGB}{255, 245, 242}
+\definecolor{lightblue}{RGB}{232, 241, 252}   % light blue for alert blocks
 
 % ====================
 % Theme
@@ -22,23 +18,23 @@
 \setbeamercolor{palette secondary}{fg=black,bg=white}
 \setbeamercolor{palette tertiary}{bg=black,fg=white}
 \setbeamercolor{palette quaternary}{fg=black,bg=white}
-\setbeamercolor{structure}{fg=nyupurple}
+\setbeamercolor{structure}{fg=themecolor}
 
 % Headline
-\setbeamercolor{headline}{fg=white,bg=nyupurple}
+\setbeamercolor{headline}{fg=white,bg=themecolor}
 
 % Block
-\setbeamercolor{block title}{fg=nyupurple,bg=white}
+\setbeamercolor{block title}{fg=themecolor,bg=white}
 \setbeamercolor{block separator}{bg=black}
 \setbeamercolor{block body}{fg=black,bg=white}
 
 % Alert Block
-\setbeamercolor{block alerted title}{fg=nyupurple,bg=lightorange}
-\setbeamercolor{block alerted separator}{bg=black}
-\setbeamercolor{block alerted body}{fg=black,bg=lightorange}
+\setbeamercolor{block alerted title}{fg=themecolor,bg=lightblue}
+\setbeamercolor{block alerted separator}{bg=themecolor}
+\setbeamercolor{block alerted body}{fg=black,bg=lightblue}
 
 % Example Block
-\setbeamercolor{block example title}{fg=nyupurple,bg=lightgray}
+\setbeamercolor{block example title}{fg=themecolor,bg=lightgray}
 \setbeamercolor{block example separator}{bg=black}
 \setbeamercolor{block example body}{fg=black,bg=lightgray}
 
@@ -46,7 +42,7 @@
 \setbeamercolor{heading}{fg=black}
 
 % Itemize
-\setbeamercolor{item}{fg=nyupurple}
+\setbeamercolor{item}{fg=themecolor}
 
 % Bibliography
 \setbeamercolor{bibliography item}{fg=black}

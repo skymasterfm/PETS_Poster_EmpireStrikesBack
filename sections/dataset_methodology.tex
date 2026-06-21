@@ -1,32 +1,28 @@
   \begin{block}{Dataset \& Methodology}
 
     \begin{itemize}
-      \item \textbf{Website list:} \textbf{18.9K} federal-level government websites across \textbf{61 countries} on all continents, from Kumar et al.'s IMC 2024 dataset.
-      \item \textbf{Archival source:} Internet Archive Wayback Machine snapshots spanning \textbf{1996--2025}; \textbf{16.5K} websites had at least one snapshot (\textbf{88\%} average coverage per country).
-      \item \textbf{Sampling:} \textbf{2 homepage snapshots per site per year} (first of year + one random), analyzed at yearly granularity; \textbf{7.3M} URLs extracted (\textbf{5.6M} unique) after de-rewriting archive URLs.
-      \item \textbf{Tracker labeling:} EasyList + EasyPrivacy + \textbf{21 regional filter lists} (June 2025 snapshot, validated against 2006/2010/2020 historical lists; modern list had \textbf{0.01\%} vs.\ \textbf{0.54\%} false-positive rate on 2006 data).
-      \item \textbf{Ownership mapping:} DuckDuckGo Tracker Radar maps \textbf{365 of 1098} tracker domains (eTLD+1) to \textbf{265 organizations}.
-      \item \textbf{Statistics:} Mann--Kendall trend tests on 5-year buckets, Jaccard similarity, Herfindahl--Hirschman Index (HHI), and a First-Observed Uptake (FOU) measure.
+      \item \textbf{18.9K} federal-level sites across \textbf{61 countries}; Internet Archive snapshots \textbf{1996--2025}; \textbf{7.3M} URLs extracted.
+      \item \textbf{Tracker labeling:} EasyList + EasyPrivacy + \textbf{21 regional filter lists}; ownership via DuckDuckGo Tracker Radar (\textbf{365 of 1098} tracker domains mapped to \textbf{265 orgs}).
+      \item \textbf{Statistics:} Mann--Kendall trend tests, Jaccard similarity, HHI, First-Observed Uptake (FOU).
     \end{itemize}
 
     \begin{figure}
       \centering
       \begin{tikzpicture}[
-        node distance=1.6cm,
-        box/.style={draw, rounded corners, align=center, fill=white, text width=0.65\colwidth, inner sep=0.5cm, font=\small},
-        arr/.style={->, line width=2.5pt}
+        node distance=1.2cm,
+        box/.style={draw, rounded corners, align=center, fill=white, text width=0.6\colwidth, inner sep=0.35cm, font=\small},
+        arr/.style={->, line width=2pt}
       ]
-        \node[box] (src) {\textbf{Data Source:} Kumar et al.\ IMC'24 list --- 18.9K sites, 61 countries};
-        \node[box, below=of src] (arch) {\textbf{Crawling / Archiving:} Internet Archive snapshots, 1996--2025};
-        \node[box, below=of arch] (extract) {\textbf{Feature Extraction:} 7.3M URLs; EasyList/EasyPrivacy + regional lists; Tracker Radar};
-        \node[box, below=of extract] (analysis) {\textbf{Longitudinal Analysis:} Mann--Kendall, HHI, Jaccard, FOU};
+        \node[box] (src)     {\textbf{Source:} Kumar et al.\ IMC'24 : 18.9K sites, 61 countries};
+        \node[box, below=of src]  (arch)    {\textbf{Archive:} Wayback Machine snapshots, 1996--2025};
+        \node[box, below=of arch] (extract) {\textbf{Extraction:} 7.3M URLs; EasyList/EasyPrivacy + regional lists; Tracker Radar};
+        \node[box, below=of extract] (analysis) {\textbf{Analysis:} Mann--Kendall, HHI, Jaccard, FOU};
         \node[box, below=of analysis] (find) {\textbf{Findings:} prevalence, geography, ownership, uptake};
         \draw[arr] (src) -- (arch);
         \draw[arr] (arch) -- (extract);
         \draw[arr] (extract) -- (analysis);
         \draw[arr] (analysis) -- (find);
       \end{tikzpicture}
-      \caption{Measurement pipeline: from government website lists to longitudinal tracker findings.}
     \end{figure}
 
   \end{block}

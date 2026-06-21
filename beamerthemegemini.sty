@@ -8,24 +8,52 @@
 \RequirePackage{exscale}
 \RequirePackage{ragged2e}
 \RequirePackage{changepage}
-\RequirePackage{fontspec}
 \RequirePackage{calc}
 
 % ====================
 % Fonts
 % ====================
 
-\newfontfamily\Raleway[Ligatures=TeX]{Raleway}
-\newfontfamily\Lato[Ligatures=TeX]{Lato}
+% Under LuaLaTeX, fontspec requires luaotfload. When luaotfload is absent
+% (e.g. minimal TeX Live 2019 installs) fontspec silently produces nullfont.
+% We probe for the module in Lua before loading fontspec to avoid that.
+\newif\iffontspecok
+\fontspecokfalse
+\directlua{%
+  local ok = pcall(require, 'luaotfload-main')
+  if ok then
+    tex.print([[\string\fontspecoktrue]])
+  end
+}
+
+\iffontspecok
+  \RequirePackage{fontspec}
+  \IfFontExistsTF{Raleway}{%
+    \newfontfamily\Raleway[Ligatures=TeX]{Raleway}%
+  }{%
+    \IfFontExistsTF{Lato}{%
+      \newfontfamily\Raleway[Ligatures=TeX]{Lato}%
+    }{%
+      \let\Raleway\sffamily%
+    }%
+  }
+  \IfFontExistsTF{Lato}{%
+    \newfontfamily\Lato[Ligatures=TeX]{Lato}%
+    \setsansfont{Lato}[
+      UprightFont=*-Light,
+      ItalicFont=*-LightItalic,
+      BoldFont=*-Regular,
+      BoldItalicFont=*-Italic
+    ]%
+  }{%
+    \let\Lato\sffamily%
+  }
+\else
+  \let\Raleway\sffamily
+  \let\Lato\sffamily
+\fi
 
 \usefonttheme{professionalfonts}
-
-\setsansfont{Lato}[
-  UprightFont=*-Light,
-  ItalicFont=*-LightItalic,
-  BoldFont=*-Regular,
-  BoldItalicFont=*-Italic
-]
 
 \setbeamerfont{headline}{family=\Raleway}
 \setbeamerfont{headline title}{size=\Huge,series=\bfseries}

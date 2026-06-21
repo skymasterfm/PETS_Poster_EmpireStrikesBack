@@ -12,12 +12,12 @@
 % ====================
 
 \usepackage[T1]{fontenc}
- \usepackage[utf8]{luainputenc}
 \usepackage{lmodern}
 \usepackage[size=custom, width=120,height=72, scale=1]{beamerposter}
 \usetheme{gemini}
 \usecolortheme{cam}
 \usepackage{graphicx}
+\graphicspath{{figures/}{logos/}}
 \usepackage{booktabs}
 \usepackage{tikz}
 \usetikzlibrary{positioning}
@@ -62,11 +62,9 @@
 % Logo (optional)
 % ====================
 
-% use this to include logos on the left and/or right side of the header:
-% Left: institution
- \logoleft{\includegraphics[height=5cm]{logos/nyuad_white.png}}
-% Right: funding agencies and other affilations 
-%\logoright{\includegraphics[height=7cm]{logos/NSF.eps}}
+% Logos: left = Utah, right = NYUAD
+\logoleft{\includegraphics[height=5cm]{logos/utah_logo.png}}
+\logoright{\includegraphics[height=5cm]{logos/nyuad_white.png}}
 % ====================
 % Body
 % ====================
